@@ -1,0 +1,53 @@
+.div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+  
+.card1 {
+    width: 400px;
+    height: 400px;
+    background-image: url("C:\Users\nadir\Tüm Projelerim\StajProjesiKartaca\Frontend\e-auction-app\public\Images\table.jpg");
+    background-size: cover; /* Resmin card boyutuna otomatik olarak uyum sağlamasını sağlar */
+    background-repeat: no-repeat; /* Resmin tekrarlanmasını önler */
+    background-position: center; /* Resmi card'ın ortasına yerleştirir */
+}
+  
+.bodyy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+  
+.title {
+    margin-bottom: 1rem;
+}
+  
+.etiket {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 250px;
+  height: 50px;
+  margin-left: 30px;
+}
+
+
+.in {
+    width: 250px;
+}
+
+.buttonum {
+    margin-left: 60px;
+    width: 125px;
+    font-size:1.3em;
+}
+
+.lab {
+  margin-bottom: 30px;
+}
