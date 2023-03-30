@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function Home() {
   const [product, setProduct] = useState([]);
-
+  const token = localStorage.getItem("tokenKey")
   useEffect(() => {
     const url = "/products";
     const fetchData = async () => {
@@ -35,7 +35,8 @@ function Home() {
     fetch(`/products/${product.productId}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':`${token}`
       },
       body: JSON.stringify({
         price: parseFloat(newPrice)
