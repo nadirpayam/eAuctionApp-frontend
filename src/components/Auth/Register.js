@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route,Link } from "react-router-dom";
+import './Register.css'
 
 function Register() {
-    
+
     const [name,setName] = useState("")
     const [surname,setSurname] = useState("")
     const [username,setUsername] = useState("")
@@ -47,7 +48,8 @@ function Register() {
             }),
         })
         .then((res)=> res.json())
-        .then((result)=>{localStorage.setItem("tokenKey",result.message);
+        .then((result)=>{localStorage.setItem("tokenKey",result.accessToken);
+        localStorage.setItem("refreshKey",result.refreshToken);
           localStorage.setItem("currentUser",result.userId);
           localStorage.setItem("userName",username)})
         .catch((err)=>console.log(err))
@@ -55,12 +57,12 @@ function Register() {
 
 
   return (
-    <section className="vh-100 gradient-custom" style={{ marginTop: "5px" }}>
-      <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+    <section className="vh-25 gradient-custom register">
+      <div className="container py-4 h-10">
+        <div className="row d-flex justify-content-center align-items-center h-10">
+          <div className="col-12 col-lg-8 col-lg-6 col-xl-5">
             <div
-              className="card bg-dark text-white"
+              className="card bg-success text-white"
               style={{ borderRadius: "1rem" }}
             >
               <div className="card-body p-5 text-center">
@@ -141,6 +143,7 @@ function Register() {
         </div>
       </div>
     </section>
+  
   );
 }
 

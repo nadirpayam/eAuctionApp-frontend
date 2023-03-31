@@ -39,7 +39,8 @@ function Login() {
           }),
       })
       .then((res)=> res.json())
-      .then((result)=>{localStorage.setItem("tokenKey",result.message);
+      .then((result)=>{localStorage.setItem("tokenKey",result.accessToken);
+        localStorage.setItem("refreshKey",result.refreshToken);
         localStorage.setItem("currentUser",result.userId);
         localStorage.setItem("userName",username)})
       .catch((err)=>console.log(err))
@@ -51,7 +52,7 @@ function Login() {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div
-              className="card bg-dark text-white"
+              className="card bg-success text-white"
               style={{ borderRadius: "1rem" }}
             >
               <div className="card-body p-5 text-center">

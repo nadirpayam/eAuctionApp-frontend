@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { RefreshToken } from "../../services/HttpService";
+import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+
+ 
+
+  const logout = () => {
+    localStorage.removeItem("tokenKey");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("refreshKEy");
+    localStorage.removeItem("username");
+    navigate(0);
+    navigate("/");
+  };
   const [product, setProduct] = useState([]);
-  const token = localStorage.getItem("tokenKey")
+  const token = localStorage.getItem("tokenKey");
   useEffect(() => {
     const url = "/products";
     const fetchData = async () => {
@@ -33,30 +48,52 @@ function Home() {
     event.preventDefault();
     const newPrice = event.target.elements.offerInput.value;
     fetch(`/products/${product.productId}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization':`${token}`
+        "Content-Type": "application/json",
+        Authorization: `${token}`,
       },
       body: JSON.stringify({
-        price: parseFloat(newPrice)
+        price: parseFloat(newPrice),
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          RefreshToken()
+            .then((res) => {
+              if (!res.ok) {
+                logout();
+              } else {
+                return res.json();
+              }
+            })
+
+            .then((data) => {
+              console.log(data); // updated product object returned by the API
+              if (data != undefined) {
+                localStorage.setItem("tokenKey", data.accessToken);
+                handleOffer();
+                setProduct((prevState) => {
+                  const updatedProductIndex = prevState.findIndex(
+                    (p) => p.productId === product.productId
+                  );
+                  const updatedProducts = [...prevState];
+                  updatedProducts[updatedProductIndex] = data;
+                  return updatedProducts;
+                });
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else res.json();
       })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data); // updated product object returned by the API
-      setProduct(prevState => {
-        const updatedProductIndex = prevState.findIndex(p => p.productId === product.productId);
-        const updatedProducts = [...prevState];
-        updatedProducts[updatedProductIndex] = data;
-        return updatedProducts;
+      .catch((err) => {
+        console.log(err);
       });
-    })
-    .catch(error => console.error(error));
 
-    event.target.elements.offerInput.value = '';
-
-  }
+    event.target.elements.offerInput.value = "";
+  };
 
   return (
     <div
