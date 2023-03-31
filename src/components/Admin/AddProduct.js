@@ -7,6 +7,7 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [file, setFile] = useState("");
   const [sold, setSold] = useState("");
+  const token = localStorage.getItem("tokenKey");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const AddProduct = () => {
       const response = await axios.post("/products", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+           Authorization: `${token}`,
         },
       });
       console.log(response.data);
