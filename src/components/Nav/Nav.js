@@ -2,7 +2,7 @@ import React from "react";
 import AddProduct from "../Admin/AddProduct"
 import { BrowserRouter, Routes, Route,Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
+import "./Nav.css";
 
 function Nav() {
   const navigate = useNavigate();
@@ -17,19 +17,19 @@ function Nav() {
   }
   
   return (
-<nav className="navbar navbar-expand-lg bg-success">
+<nav className="navbar navbar-expand-lg bg-success nav" >
   <div className="container-fluid">
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
      </button>
      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav ms-auto mb-2 mb-lg-0" style={{display: 'flex', alignItems: 'center',width:"100%",justifyContent:"space-between"}}>
+      <ul className="navbar-nav ms-auto mb-2 mb-lg-0 ul1" style={{display: 'flex', alignItems: 'center',width:"100%",justifyContent:"space-between"}}>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <li>
       <Link to="/" className="navbar-brand active" href="#" style={{fontSize: '1.7em'}}>Anasayfa</Link>
       </li>
         <li >
-          {localStorage.getItem("currentUser") == 4 ? <Link to="/urunekle" className="nav-link" style={{fontSize: '1.7em'}}>Ürün Ekle</Link> : <p></p>}
+          {localStorage.getItem("currentUser") == 12 ? <Link to="/urunekle" className="nav-link" style={{fontSize: '1.7em'}}>Ürün Ekle</Link> : <p></p>}
         </li>
         </div>
 

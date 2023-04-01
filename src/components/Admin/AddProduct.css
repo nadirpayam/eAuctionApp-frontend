@@ -8,7 +8,7 @@
   }
   
   .card1 {
-    background-color: rgba(139, 145, 223, 0.2);
+    background-image: url("../../../public//Images/table.jpg");
     background-size: cover;
     background-position: center;
     width: 750%;

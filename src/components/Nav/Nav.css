@@ -1,0 +1,9 @@
+.nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .ul1 {
+    font-size: 14px;
+  }

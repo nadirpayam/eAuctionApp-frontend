@@ -186,7 +186,7 @@ function Home() {
       {product.map((product) => (
         <div
           key={product.productId}
-          className="card"
+          className="card car"
           style={{
             width: "18rem",
             margin: "0.5rem",

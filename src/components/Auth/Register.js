@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./Register.css";
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [username, setUsername] = useState("");
@@ -30,6 +33,8 @@ function Register() {
     setSurname("");
     setUsername("");
     setPassword("");
+    navigate('/giris');
+    navigate(0);
   };
 
   const sendRequest = (path) => {
