@@ -1,53 +1,35 @@
-.div {
+  .cont1 {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
-}
+    width: 370px;
+    overflow: hidden;
+  }
   
-.card1 {
-    width: 400px;
-    height: 400px;
-    background-image: url("C:\Users\nadir\Tüm Projelerim\StajProjesiKartaca\Frontend\e-auction-app\public\Images\table.jpg");
-    background-size: cover; /* Resmin card boyutuna otomatik olarak uyum sağlamasını sağlar */
-    background-repeat: no-repeat; /* Resmin tekrarlanmasını önler */
-    background-position: center; /* Resmi card'ın ortasına yerleştirir */
-}
+  .card1 {
+    background-color: rgba(139, 145, 223, 0.2);
+    background-size: cover;
+    background-position: center;
+    width: 750%;
+    max-width: 500px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 13px 14px 10px -3px rgba(0,0,0,0.75);
+    border-radius:15px;
+    margin-top: -70px;
+  }
   
-.bodyy {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
+  .title1{
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
   
-.title {
-    margin-bottom: 1rem;
-}
+  .input1{
+    margin-bottom: 10px;
+  }
   
-.etiket {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  width: 250px;
-  height: 50px;
-  margin-left: 30px;
-}
-
-
-.in {
-    width: 250px;
-}
-
-.buttonum {
-    margin-left: 60px;
-    width: 125px;
-    font-size:1.3em;
-}
-
-.lab {
-  margin-bottom: 30px;
-}
+  .buttonum {
+    margin-top: 2rem;
+  }
+  

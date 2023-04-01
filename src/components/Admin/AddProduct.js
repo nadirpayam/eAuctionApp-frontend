@@ -31,45 +31,45 @@ const AddProduct = () => {
   };
 
   return (
-    <div class="container div">
-    <div class="card card1">
-      <div class="card-body bodyy">
-        <h5 class="card-title title">Ürün Bilgilerini Girin</h5>
+    <div className="container cont1">
+    <div className="card card1">
+      <div className="card-body body1">
+        <h5 className="card-title title1">Ürün Bilgilerini Girin</h5>
         <form onSubmit={handleSubmit}>
-          <label className="lab">
+          <label className="lab lab1">
             Ürün Adı
             <input
-              className="form-control etiket"
+              className="form-control input1"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <label className="lab">
+          <label className="lab1">
             Fiyatı
             <input
-              className="form-control etiket"
+              className="form-control input1"
               type="number"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
           </label>
-          <label className="lab">
+          <label className="lab1">
             Görseli
             <input
-              className="form-control etiket"
+              className="form-control input1"
               type="file"
               onChange={(e) => setFile(e.target.files[0])}
             />
           </label>
-          <button type="submit" class="btn btn-success buttonum">
+          <button type="submit" className="btn btn-success buttonum">
             Ürünü Ekle
           </button>
         </form>
       </div>
     </div>
   </div>
-  
+    
   )
 }
 

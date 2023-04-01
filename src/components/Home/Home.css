@@ -1,3 +1,23 @@
 .btn-success {
     color: #fff; /* veya "color: white;" de yazılabilir */
   }
+
+  h1 {
+    position: absolute;
+    margin-top: 30vh;
+    width: 100%;
+    text-align: center;
+    font-size: 1000%; /* Yeni font boyutu */
+    font-family: sans-serif;
+    color: red; /* Yeni renk */
+    opacity: 0.5;
+    bottom: 0;
+    font-weight: bold; /* Kalın font */
+  }
+  
+  
+  .card {
+    position: relative;
+    /* diğer stiller */
+  }
+  

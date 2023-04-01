@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { RefreshToken } from "../../services/HttpService";
 import "./Home.css";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Confetti from 'react-confetti';
+
 
 function Home() {
   const navigate = useNavigate();
@@ -12,18 +14,24 @@ function Home() {
   const [timer, setTimer] = useState(null);
   const [isTimeUp, setIsTimeUp] = useState(false);
 
+  const [clicked, setClicked] = useState(false);
 
+
+  const handleClick = (value) => {
+    setClicked(true);
+    setTimeout(() => {
+      setClicked(false);
+    }, 5000); // 5 seconds in milliseconds
+  };
 
   useEffect(() => {
     setTimer(
       setInterval(() => {
-        setCountdown(prevCountdown => prevCountdown - 1);
+        setCountdown((prevCountdown) => prevCountdown - 1);
       }, 1000)
     );
     return () => clearInterval(timer);
   }, []);
-
-  
 
   const logout = () => {
     localStorage.removeItem("tokenKey");
@@ -33,7 +41,7 @@ function Home() {
     navigate(0);
     navigate("/");
   };
- 
+
   useEffect(() => {
     const url = "/products/rand";
     const fetchData = async () => {
@@ -71,7 +79,7 @@ function Home() {
       },
       body: JSON.stringify({
         price: parseFloat(newPrice),
-            }),
+      }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -120,8 +128,8 @@ function Home() {
         Authorization: `${token}`,
       },
       body: JSON.stringify({
-        sold:true,
-            }),
+        sold: true,
+      }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -157,22 +165,24 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
-
   };
 
-  
-
   return (
-    <div
+    <div style={{ position: 'relative' }}>
+  {clicked && <Confetti width={window.innerWidth} height={window.innerHeight} wind={0.05} gravity={0.1} />}
+  {clicked && <h1 style={{ position: 'absolute', zIndex: '1', top: '0', left: '50%', transform: 'translateX(-50%)' }}>SATIŞ YAPILDI!!!</h1>}
+
+  <div
       style={{
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        marginBottom: '70px'
+        marginBottom: "70px",
       }}
-    >
+    > 
+    
       {product.map((product) => (
         <div
           key={product.productId}
@@ -181,10 +191,9 @@ function Home() {
             width: "18rem",
             margin: "0.5rem",
             overflow: "hidden",
-            
           }}
-        >
-          <h5 className="card-title">{product.name}</h5>
+        > 
+     <h5 className="card-title">{product.name}</h5>
           <img
             src={product.imageUrl}
             className="card-img-top"
@@ -196,50 +205,77 @@ function Home() {
             }}
           />
           <div className="card-body">
-            <b className="card-text">Güncel Fiyat: {product.price} TL</b> <hr></hr>
+            <b className="card-text">Güncel Fiyat: {product.price} TL</b>{" "}
+            <hr></hr>
           </div>
           <form onSubmit={(event) => handleOffer(event, product)}>
-          {localStorage.getItem("currentUser") == null ? 
-          <b>Açık Arttırmaya Katılmak İçin Giriş Yapmalısınız!
-          <Link to="/giris" className="dropdown-item" href="#" style={{fontSize: '1.1em', color:"blue"}}>Giriş Yapın</Link>
-          </b>:
-            <div className="input-group mb-3" style={{marginBottom:'1px'}}>
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Teklifiniz?"
-                aria-label="Example text with button addon"
-                aria-describedby="button-addon1"
-                name="offerInput"
-              />
-              <button
-                className="btn btn-outline-secondary btn-success"
-                type="submit"
-                id="button-addon1"
-              >
-                Teklif Et
-              </button>
-                 </div> }
-            
+            {localStorage.getItem("currentUser") == null ? (
+              <b>
+                Açık Arttırmaya Katılmak İçin Giriş Yapmalısınız!
+                <Link
+                  to="/giris"
+                  className="dropdown-item"
+                  href="#"
+                  style={{ fontSize: "1.1em", color: "blue" }}
+                >
+                  Giriş Yapın
+                </Link>
+              </b>
+            ) : (
+              <div className="input-group mb-3" style={{ marginBottom: "1px" }}>
+                <input
+                  type="number"
+                  className="form-control"
+                  placeholder="Lütfen teklifinizi girin?"
+                  aria-label="Example text with button addon"
+                  aria-describedby="button-addon1"
+                  name="offerInput"
+                />
+                <button
+                  className="btn btn-outline-warning btn-success"
+                  type="submit"
+                  id="button-addon1"
+                >
+                  Teklif Et
+                </button>
+              </div>
+            )}
           </form>
-          
-          <form onSubmit={(event) => handleOffer2(event, product)}>
-          {localStorage.getItem("currentUser") == null ? 
-          <b>
-          <Link to="/giris" className="dropdown-item" href="#" style={{fontSize: '1.1em', color:"blue"}}></Link>
-          </b>:
-            <div className="input-group mb-3" style={{marginBottom:'1px'}}>
+
+          <form
+            onSubmit={(event) => {
+              handleOffer2(event, product);
+              setCountdown(10);
+            }}
+          >
+            {localStorage.getItem("currentUser") == null ? (
+              <b>
+                <Link
+                  to="/giris"
+                  className="dropdown-item"
+                  href="#"
+                  style={{ fontSize: "1.1em", color: "blue" }}
+                ></Link>
+              </b>
+            ) : (
+              <div className="input-group mb-3" style={{ marginBottom: "1px" }}>
+                {countdown < 0 ? (
+                  <div> 
+                  <button className= "btn btn-outline-warning btn-danger" style={{marginLeft: '100px', color: 'white'}} onClick={handleClick}>Satın Al</button>                  
+                   </div>
+                ) : (
+                  <div>
+                    Açık Arttırmanın Bitmesine {countdown} saniye kaldı!
+                  </div>
+                )}
               
-               {countdown < 0 ? (
-        <button>Satın Al</button>
-      ) : (
-        <div>Açık Arttırmanın Bitmesine {countdown} saniye kaldı! </div>
-      )}      </div> 
-                 }
-            
+              </div>
+            )}
           </form>
+         
         </div>
       ))}
+    </div>
     </div>
   );
 }
