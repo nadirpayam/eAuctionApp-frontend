@@ -16,6 +16,7 @@ function Home() {
 
   const [clicked, setClicked] = useState(false);
 
+ 
 
   const handleClick = (value) => {
     setClicked(true);
@@ -115,7 +116,6 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
-
     event.target.elements.offerInput.value = "";
   };
 

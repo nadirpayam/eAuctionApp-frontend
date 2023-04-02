@@ -15,6 +15,8 @@ function Nav() {
     navigate("/")
 
   }
+
+  
   
   return (
 <nav className="navbar navbar-expand-lg bg-success nav" >
@@ -34,7 +36,7 @@ function Nav() {
         </div>
 
         <li >
-          {localStorage.getItem("currentUser") == null ? <Link to="/giris" className="dropdown-item" href="#" style={{fontSize: '1.7em',float: 'left'}}>Giriş Yap</Link> :
+          {localStorage.getItem("currentUser") == null ? <Link to="/giris" className="dropdown-item" href="#"  style={{fontSize: '1.7em',float: 'left'}}>Giriş Yap</Link> :
           <div>
             <button className="btn btn-outline-dark my-2 my-sm-0" type="submit" onClick={onClick}>Çıkış Yap</button>
           </div>

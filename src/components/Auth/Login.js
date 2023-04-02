@@ -23,8 +23,6 @@ function Login() {
         setUsername("")
         setPassword("") 
         navigate('/');
-        navigate(0);
-
     }
 
     const sendRequest=(path) => {
@@ -43,7 +41,7 @@ function Login() {
         localStorage.setItem("refreshKey",result.refreshToken);
         localStorage.setItem("currentUser",result.userId);
         localStorage.setItem("userName",username)})
-      .catch((err)=>console.log(err))
+      .catch((err)=>console.log(err)) 
   }
 
   return (
